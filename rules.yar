@@ -1023,27 +1023,6 @@ rule HKTL_PS1_PowerCat_Mar21_RID2EDD : DEMO HKTL T1059_001 T1086 {
       uint16 ( 0 ) == 0x7566 and filesize < 200KB and 1 of ( $x* ) or 3 of them
 }
 
-rule APT_HAFNIUM_Forensic_Artefacts_Mar21_1_RID3463 : APT DEMO {
-   meta:
-      description = "Detects forensic artefacts found in HAFNIUM intrusions"
-      author = "Florian Roth"
-      reference = "https://www.microsoft.com/security/blog/2021/03/02/hafnium-targeting-exchange-servers/"
-      date = "2021-03-02 15:28:21"
-      score = 75
-      customer = "demo"
-      license = "CC-BY-NC https://creativecommons.org/licenses/by-nc/4.0/"
-      
-      tags = "APT, DEMO"
-      minimum_yara = "1.7"
-      
-   strings:
-      $s1 = "lsass.exe C:\\windows\\temp\\lsass" ascii wide fullword
-      $s2 = "c:\\ProgramData\\it.zip" ascii wide fullword
-      $s3 = "powercat.ps1'); powercat -c" ascii wide fullword
-   condition: 
-      1 of them
-}
-
 rule WEBSHELL_PHP_DEWMODE_UNC2546_Feb21_1_RID3187 : DEMO T1100 WEBSHELL {
    meta:
       description = "Detects DEWMODE webshells"
